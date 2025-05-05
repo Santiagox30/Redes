@@ -22,20 +22,17 @@
 <body>
     <h1>Bienvenidos al website</h1>
 
-    <h2>Listado de Estudiantes</h2>
 <table border="1">
     <tr>
-        <th>ID</th>
-        <th>Identificación</th>
+        <th>ID_Usuarios</th>
         <th>Nombre</th>
-        <th>Curso</th>
-        <th>Nota1</th>
-        <th>Nota2</th>
-        <th>Nota3</th>
-        <th>Acciones</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Contraseña</th>
+        <th>Rol</th>
     </tr>
     <?php
-        $result = $dbConn->query("SELECT * FROM Usuarios ORDER BY Id_Usuario DESC");
+        $result = $dbConn->query("SELECT * FROM Usuarios ORDER BY Id_Usuario ASC");
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo 
             '<tr>
@@ -46,8 +43,8 @@
                     <td>' . $row['Contrasena'] . '</td>
                     <td>' . $row['Rol'] . '</td>
                     <td>
-                        <a href="?edit_id=' . $row['id'] . '">Editar</a> |
-                        <a href="?delete_id=' . $row['id'] . '" onclick="return confirm(\'¿Está seguro?\')">Eliminar</a>
+                        <a href="?edit_id=' . $row['Id_Usuario'] . '">Editar</a> |
+                        <a href="?delete_id=' . $row['Id_Usuario'] . '" onclick="return confirm(\'¿Está seguro?\')">Eliminar</a>
                     </td>
             </tr>';
         }
