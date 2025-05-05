@@ -72,12 +72,12 @@
     <div class="sidebar">
       <h2>Opciones</h2>
       <form method="get">
-        <button name="opcion" value="usuarios">USUARIOS</button>
-        <button name="opcion" value="clientes">CLIENTES</button>
-        <button name="opcion" value="proveedores">PROVEEDORES</button>
-        <button name="opcion" value="facturas">FACTURAS</button>
-        <button name="opcion" value="inventario">INVENTARIO</button>
-        <button name="opcion" value="gastos">GASTOS</button>
+        <button name="opcion" value="usuarios" > <a href="ListadoUsuarios.php" style= 'color: white; text-decoration: none; '>Usuarios</a> </button>
+        <button name="opcion" value="clientes"><a href="ListadoClientes.php" style= 'color: white; text-decoration: none; '>Clientes</a></button>
+        <button name="opcion" value="proveedores"><a href="ListadoProveedores.php" style= 'color: white; text-decoration: none; '>Proveedores</a></button>
+        <button name="opcion" value="facturas"><a href="ListadoFacturas.php" style= 'color: white; text-decoration: none; '>Facturas</a></button>
+        <button name="opcion" value="inventario"><a href="ListadoInventarios.php" style= 'color: white; text-decoration: none; '>Inventarios</a></button>
+        <button name="opcion" value="gastos"><a href="ListadoGastos.php" style= 'color: white; text-decoration: none; '>Gastos</a></button>
       </form>
     </div>
     <div class="main">
