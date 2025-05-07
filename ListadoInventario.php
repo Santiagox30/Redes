@@ -60,7 +60,7 @@
                 <th>Id_Usuario</th>
             </tr>
             <?php
-                $result = $dbConn->query("SELECT * FROM Cantidad ORDER BY Id_Movimiento ASC");
+                $result = $dbConn->query("SELECT * FROM Inventario ORDER BY Id_Movimiento ASC");
                 while($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo 
                     '<tr>
