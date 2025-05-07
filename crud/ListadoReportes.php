@@ -59,7 +59,7 @@
                 <th>Id_Usuario</th>
             </tr>
             <?php
-                $result = $dbConn->query("SELECT * FROM Reporte ORDER BY Id_Reporte ASC");
+                $result = $dbConn->query("SELECT * FROM Reportes ORDER BY Id_Reporte ASC");
                 while($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo 
                     '<tr>
