@@ -68,8 +68,8 @@
                             <td>' . $row['Fecha_Generacion'] . '</td>
                             <td>' . $row['Id_Usuario'] . '</td>
                             <td>
-                                <a href="?edit_id=' . $row['Id_Movimiento'] . '">Editar</a> |
-                                <a href="?delete_id=' . $row['Id_Movimiento'] . '" onclick="return confirm(\'¿Está seguro?\')">Eliminar</a>
+                                <a href="?edit_id=' . $row['Id_Reporte'] . '">Editar</a> |
+                                <a href="?delete_id=' . $row['Id_Reporte'] . '" onclick="return confirm(\'¿Está seguro?\')">Eliminar</a>
                             </td>
                     </tr>';
                 }
