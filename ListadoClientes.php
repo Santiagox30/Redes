@@ -53,23 +53,29 @@
     <div style="display: flex; justify-content: center; width: 100%;">
         <table>
             <tr>
-                <th>Id_Reporte</th>
-                <th>Tipo_de_Reporte</th>
-                <th>Fecha_Generacion</th>
-                <th>Id_Usuario</th>
+                <th>Id_Cliente</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo_Documento</th>
+                <th>Numero_Documento</th>
+                <th>Telefono</th>
+                <th>Correo</th>
             </tr>
             <?php
-                $result = $dbConn->query("SELECT * FROM Reportes ORDER BY Id_Reporte ASC");
+                $result = $dbConn->query("SELECT * FROM Clientes ORDER BY Id_Cliente ASC");
                 while($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     echo 
                     '<tr>
-                            <td>' . $row['Id_Reporte'] . '</td>
-                            <td>' . $row['Tipo_de_Reporte'] . '</td>
-                            <td>' . $row['Fecha_Generacion'] . '</td>
-                            <td>' . $row['Id_Usuario'] . '</td>
+                            <td>' . $row['Id_Cliente'] . '</td>
+                            <td>' . $row['Nombre'] . '</td>
+                            <td>' . $row['Apellido'] . '</td>
+                            <td>' . $row['Tipo_Documento'] . '</td>
+                            <td>' . $row['Numero_Documento'] . '</td>
+                            <td>' . $row['Telefono'] . '</td>
+                            <td>' . $row['Correo'] . '</td>
                             <td>
-                                <a href="?edit_id=' . $row['Id_Movimiento'] . '">Editar</a> |
-                                <a href="?delete_id=' . $row['Id_Movimiento'] . '" onclick="return confirm(\'¿Está seguro?\')">Eliminar</a>
+                                <a href="?edit_id=' . $row['Id_Cliente'] . '">Editar</a> |
+                                <a href="?delete_id=' . $row['Id_Cliente'] . '" onclick="return confirm(\'¿Está seguro?\')">Eliminar</a>
                             </td>
                     </tr>';
                 }
