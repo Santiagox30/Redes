@@ -76,8 +76,13 @@
         <button name="opcion" value="clientes"><a href="ListadoClientes.php" style= 'color: white; text-decoration: none; '>Clientes</a></button>
         <button name="opcion" value="proveedores"><a href="ListadoProveedores.php" style= 'color: white; text-decoration: none; '>Proveedores</a></button>
         <button name="opcion" value="facturas"><a href="ListadoFacturas.php" style= 'color: white; text-decoration: none; '>Facturas</a></button>
-        <button name="opcion" value="inventario"><a href="ListadoInventarios.php" style= 'color: white; text-decoration: none; '>Inventarios</a></button>
+        <button name="opcion" value="gastos"><a href="ListadoDetalleFactura.php" style= 'color: white; text-decoration: none; '>DetalleFactura</a></button>
+        <button name="opcion" value="inventario"><a href="ListadoInventario.php" style= 'color: white; text-decoration: none; '>Inventarios</a></button>
         <button name="opcion" value="gastos"><a href="ListadoGastos.php" style= 'color: white; text-decoration: none; '>Gastos</a></button>
+        <button name="opcion" value="gastos"><a href="ListadoProductos.php" style= 'color: white; text-decoration: none; '>Productos</a></button>
+        <button name="opcion" value="gastos"><a href="ListadoReportes.php" style= 'color: white; text-decoration: none; '>Reportes</a></button>
+        <button name="opcion" value="gastos"><a href="ListadoAuditoriaUsuarios.php" style= 'color: white; text-decoration: none; '>AuditoriaUsuarios</a></button>
+        <button name="opcion" value="gastos"><a href="ListadoReporteUsuario.php" style= 'color: white; text-decoration: none; '>ReporteUsuarios</a></button>
       </form>
     </div>
     <div class="main">
