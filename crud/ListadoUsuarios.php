@@ -46,16 +46,15 @@ if (isset($_GET['edit_id'])) {
     extract($data);
 }
 
-$editing = false;
-if (isset($_GET['edit_id'])) {
-    $editing = true;
-    $id = $_GET['edit_id'];
-    $sql = "SELECT * FROM Clientes WHERE Id_Cliente=:id";
+if (isset($_GET['delete_id'])) {
+    $id = $_GET['delete_id'];
+    $sql = "DELETE FROM Usuarios WHERE Id_Usuario=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
-    $data = $query->fetch(PDO::FETCH_ASSOC);
-    extract($data);
+    header("Location: ListadoUsuarios.php");
+    exit();
+
 }
 
 ?>
