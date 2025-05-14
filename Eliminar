@@ -1,0 +1,20 @@
+<?php
+while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    echo 
+    '<tr>
+        <td>' . $row['Id_Usuario'] . '</td>
+        <td>' . $row['Nombre'] . '</td>
+        <td>' . $row['Apellido'] . '</td>
+        <td>' . $row['Correo'] . '</td>
+        <td>' . $row['Contrasena'] . '</td>
+        <td>' . $row['Rol'] . '</td>
+        <td>
+            <a href="?edit_id=' . $row['Id_Usuario'] . '">Editar</a> |
+            <form method="post" action="" style="display:inline;">
+                <input type="hidden" name="delete_id" value="' . $row['Id_Usuario'] . '">
+                <button type="submit" onclick="return confirm(\'¿Está seguro de eliminar este registro?\')">Eliminar</button>
+            </form>
+        </td>
+    </tr>';
+}
+?>
