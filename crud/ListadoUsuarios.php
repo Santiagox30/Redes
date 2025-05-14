@@ -34,6 +34,18 @@ if (isset($_POST['Submit'])) {
     }
 }
 
+$editing = false;
+if (isset($_GET['edit_id'])) {
+    $editing = true;
+    $id = $_GET['edit_id'];
+    $sql = "SELECT * FROM estudiante WHERE id=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindParam(':id', $id);
+    $query->execute();
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    extract($data);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
