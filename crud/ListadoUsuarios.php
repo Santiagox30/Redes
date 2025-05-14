@@ -46,16 +46,117 @@ if (isset($_GET['edit_id'])) {
     extract($data);
 }
 
+$editing = false;
+if (isset($_GET['edit_id'])) {
+    $editing = true;
+    $id = $_GET['edit_id'];
+    $sql = "SELECT * FROM Clientes WHERE Id_Cliente=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindParam(':id', $id);
+    $query->execute();
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    extract($data);
+}
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROYECTO BASE DE DATOS</title>
+    <title>Gestión de Usuarios</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .acciones {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+    </style>
 </head>
-<body>
-    
+<body>    
     <h1  style="display: flex; justify-content: center;">Bienvenidos al website</h1>
 
     <h2><?php echo $editing ? 'Editar Usuario' : 'Agregar Usuario'; ?></h2>
