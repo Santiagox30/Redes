@@ -46,6 +46,16 @@ if (isset($_GET['edit_id'])) {
     extract($data);
 }
 
+if (isset($_GET['delete_id'])) {
+    $id = $_GET['delete_id'];
+    $sql = "DELETE FROM Usuarios WHERE Id_Usuario=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindParam(':id', $id);
+    $query->execute();
+    header("Location: ListadoUsuarios.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
