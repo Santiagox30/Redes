@@ -38,7 +38,7 @@ $editing = false;
 if (isset($_GET['edit_id'])) {
     $editing = true;
     $id = $_GET['edit_id'];
-    $sql = "SELECT * FROM estudiante WHERE id=:id";
+    $sql = "SELECT * FROM Usuarios WHERE Id_Usuario=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
@@ -48,13 +48,35 @@ if (isset($_GET['edit_id'])) {
 
 if (isset($_GET['delete_id'])) {
     $id = $_GET['delete_id'];
-    $sql = "DELETE FROM Usuarios WHERE Id_Usuario=:id";
+    $sql = "DELETE FROM Usuarios WHERE ID_Usuarios=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
     header("Location: ListadoUsuarios.php");
     exit();
 
+}
+
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $Nombre = $_POST['Nombre'];
+    $Apellido = $_POST['Apellido'];
+    $Correo = $_POST['Correo'];
+    $Contrasena = $_POST['Contrasena'];
+    $Rol = $_POST['Rol'];
+
+    $sql = "UPDATE Usuarios SET Nombre=:Nombre, Apellido=:Apellido, Correo=:Correo,
+            Contrasena=:Contrasena, Rol=:Rol WHERE Id_Usuario=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindparam(':id', $id);
+    $query->bindparam(':Nombre', $Nombre);
+    $query->bindparam(':Apellido', $Apellido);
+    $query->bindparam(':Correo', $Correo);
+    $query->bindparam(':Contrasena', $Contrasena);
+    $query->bindparam(':Rol', $Rol);
+    $query->execute();
+    header("Location: ListadoUsuarios.php");
+    exit();
 }
 
 ?>
