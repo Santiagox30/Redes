@@ -36,7 +36,7 @@ $editing = false;
 if (isset($_GET['edit_id'])) {
     $editing = true;
     $id = $_GET['edit_id'];
-    $sql = "SELECT * FROM inventario WHERE id=:id";
+    $sql = "SELECT * FROM inventario WHERE Id_Movimiento=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
@@ -46,13 +46,34 @@ if (isset($_GET['edit_id'])) {
 
 if (isset($_GET['delete_id'])) {
     $id = $_GET['delete_id'];
-    $sql = "DELETE FROM inventario WHERE Id_Usuario=:id";
+    $sql = "DELETE FROM inventario WHERE Id_Movimiento=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
     header("Location: ListadoInventario.php");
     exit();
 
+}
+
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $Tipo_de_Movimiento = $_POST['Tipo_de_Movimiento'];
+    $Cantidad = $_POST['Cantidad'];
+    $Fecha = $_POST['Fecha'];
+    $Id_Usuario = $_POST['Id_Usuario'];
+
+
+    $sql = "UPDATE Inventario SET Tipo_de_Movimiento=:Tipo_de_Movimiento, Cantidad=:Cantidad, Fecha=:Fecha,
+            Id_Usuario=:Id_Usuario WHERE Id_Movimiento=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindparam(':id', $id);
+    $query->bindparam(':Tipo_de_Movimiento', $Tipo_de_Movimiento);
+    $query->bindparam(':Cantidad', $Cantidad);
+    $query->bindparam(':Fecha', $Fecha);
+    $query->bindparam(':Id_Usuario', $Id_Usuario);
+    $query->execute();
+    header("Location: ListadoInventario.php");
+    exit();
 }
 
 ?>
@@ -158,7 +179,7 @@ if (isset($_GET['delete_id'])) {
     
     <h1  style="display: flex; justify-content: center;">Bienvenidos al website</h1>
 
-    <h2><?php echo $editing ? 'Editar Usuario' : 'Agregar Usuario'; ?></h2>
+    <h2><?php echo $editing ? 'Editar Inventario' : 'Agregar Inventario'; ?></h2>
     <form method="post" action="ListadoInventario.php">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ''; ?>">
         <label>Tipo_de_Movimiento:</label><input type="text" name="Tipo_de_Movimiento" value="<?php echo $editing ? $Tipo_de_Movimiento : ''; ?>"><br>

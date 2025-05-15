@@ -40,14 +40,14 @@
     if (isset($_GET['edit_id'])) {
         $editing = true;
         $id = $_GET['edit_id'];
-        $sql = "SELECT * FROM Proveedores WHERE Id_Usuario=:id";
+        $sql = "SELECT * FROM Proveedores WHERE Id_Proveedor=:id";
         $query = $dbConn->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         extract($data);
     }
-    
+
     if (isset($_GET['delete_id'])) {
         $id = $_GET['delete_id'];
         $sql = "DELETE FROM Proveedores WHERE Id_Proveedor=:id";
@@ -57,6 +57,31 @@
         header("Location: ListadoProveedores.php");
         exit();
     
+    }
+
+    if (isset($_POST['update'])) {
+        $id = $_POST['id'];
+        $Nombre_Empresa = $_POST['Nombre_Empresa'];
+        $Nit = $_POST['Nit'];
+        $Contacto = $_POST['Contacto'];
+        $Telefono = $_POST['Telefono'];
+        $Correo = $_POST['Correo'];
+        $Direccion = $_POST['Direccion'];
+
+
+        $sql = "UPDATE Proveedores SET Nombre_Empresa=:Nombre_Empresa, Nit=:Nit, Contacto=:Contacto,
+                Telefono=:Telefono, Correo=:Correo , Direccion=:Direccion WHERE Id_Proveedor=:id";
+        $query = $dbConn->prepare($sql);
+        $query->bindparam(':id', $id);
+        $query->bindparam(':Nombre_Empresa', $Nombre_Empresa);
+        $query->bindparam(':Nit', $Nit);
+        $query->bindparam(':Contacto', $Contacto);
+        $query->bindparam(':Telefono', $Telefono);
+        $query->bindparam(':Correo', $Correo);
+        $query->bindparam(':Direccion', $Direccion);
+        $query->execute();
+        header("Location: ListadoProveedores.php");
+        exit();
     }
 ?>
 <!DOCTYPE html>
