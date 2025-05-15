@@ -63,6 +63,36 @@
     
     }
 
+    if (isset($_POST['update'])) {
+        $id = $_POST['id'];
+        $Nombre = $_POST['Nombre'];
+        $Descripcion = $_POST['Descripcion'];
+        $Categoria = $_POST['Categoria'];
+        $Precio_Compra = $_POST['Precio_Compra'];
+        $Precio_Venta = $_POST['Precio_Venta'];
+        $Stock = $_POST['Stock'];
+        $Unidad_Medida = $_POST['Unidad_Medida'];
+        $Id_Proveedor = $_POST['Id_Proveedor'];
+
+        
+        $sql = "UPDATE Productos SET Nombre=:Nombre, Descripcion=:Descripcion, Categoria=:Categoria,
+                Precio_Compra=:Precio_Compra, Precio_Venta=:Precio_Venta , Stock=:Stock 
+                , Unidad_Medida=:Unidad_Medida , Id_Proveedor=:Id_Proveedor WHERE Id_Producto=:id";
+        $query = $dbConn->prepare($sql);
+        $query->bindparam(':id', $id);
+        $query->bindparam(':Nombre', $Nombre);
+        $query->bindparam(':Descripcion', $Descripcion);
+        $query->bindparam(':Categoria', $Categoria);
+        $query->bindparam(':Precio_Compra', $Precio_Compra);
+        $query->bindparam(':Precio_Venta', $Precio_Venta);
+        $query->bindparam(':Stock', $Stock);
+        $query->bindparam(':Unidad_Medida', $Unidad_Medida);
+        $query->bindparam(':Id_Proveedor', $Id_Proveedor);
+        $query->execute();
+        header("Location: ListadoProductos.php");
+        exit();
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
