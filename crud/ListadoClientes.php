@@ -49,6 +49,30 @@ if (isset($_GET['edit_id'])) {
     extract($data);
 }
 
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $Nombre = $_POST['Nombre'];
+    $Apellido = $_POST['Apellido'];
+    $Tipo_Documento = $_POST['Tipo_Documento'];
+    $Numero_Documento = $_POST['Numero_Documento'];
+    $Telefono = $_POST['Telefono'];
+    $Correo = $_POST['Correo'];
+
+    $sql = "UPDATE clientes SET Nombre=:Nombre, Apellido=:Apellido, Tipo_Documento=:Tipo_Documento,
+            Numero_Documento=:Numero_Documento, Telefono=:Telefono, Correo=:Correo WHERE Id_Cliente=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindparam(':id', $id);
+    $query->bindparam(':Nombre', $Nombre);
+    $query->bindparam(':Apellido', $Apellido);
+    $query->bindparam(':Tipo_Documento', $Tipo_Documento);
+    $query->bindparam(':Numero_Documento', $Numero_Documento);
+    $query->bindparam(':Telefono', $Telefono);
+    $query->bindparam(':Correo', $Correo);
+    $query->execute();
+    header("Location: ListadoUsuarios.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +80,97 @@ if (isset($_GET['edit_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROYECTO BASE DE DATOS</title>
+     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .acciones {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+    </style>
 </head>
 <body>
     

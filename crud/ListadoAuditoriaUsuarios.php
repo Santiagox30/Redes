@@ -32,7 +32,7 @@
     if (isset($_GET['edit_id'])) {
         $editing = true;
         $id = $_GET['edit_id'];
-        $sql = "SELECT * FROM Auditoriausuarios WHERE id=:id";
+        $sql = "SELECT * FROM Auditoriausuarios WHERE Id_Usuario=:id";
         $query = $dbConn->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
@@ -51,6 +51,20 @@
     
     }
 
+    if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $Id_Usuario = $_POST['Id_Usuario'];
+    $Fecha_Revision = $_POST['Fecha_Revision'];
+
+    $sql = "UPDATE auditoriausuarios SET Id_Usuario=:Id_Usuario, Fecha_Revision=:Fecha_Revision WHERE Id_Usuario=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindparam(':id', $id);
+    $query->bindparam(':Id_Usuario', $Id_Usuario);
+    $query->bindparam(':Fecha_Revision', $Fecha_Revision);
+    $query->execute();
+    header("Location: ListadoAuditoriaUsuarios.php");
+    exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
