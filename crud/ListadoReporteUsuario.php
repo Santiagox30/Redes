@@ -32,7 +32,7 @@
     if (isset($_GET['edit_id'])) {
         $editing = true;
         $id = $_GET['edit_id'];
-        $sql = "SELECT * FROM Usuario_Reporte WHERE id=:id";
+        $sql = "SELECT * FROM Usuario_Reporte WHERE Id_Usuario=:id";
         $query = $dbConn->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
@@ -49,6 +49,22 @@
         header("Location: ListadoReporteUsuario.php");
         exit();
     
+    }
+
+
+    if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $Id_Usuario = $_POST['Id_Usuario'];
+    $Id_Reporte = $_POST['Id_Reporte'];
+
+    $sql = "UPDATE Usuario_Reporte SET Id_Usuario=:Id_Usuario, Id_Reporte=:Id_Reporte WHERE Id_Usuario=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindparam(':id', $id);
+    $query->bindparam(':Id_Usuario', $Id_Usuario);
+    $query->bindparam(':Id_Reporte', $Id_Reporte);
+    $query->execute();
+    header("Location: ListadoReporteUsuario.php");
+    exit();
     }
 
 ?>
