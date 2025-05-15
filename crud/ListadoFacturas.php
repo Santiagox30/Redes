@@ -44,7 +44,7 @@ $editing = false;
 if (isset($_GET['edit_id'])) {
     $editing = true;
     $id = $_GET['edit_id'];
-    $sql = "SELECT * FROM facturas WHERE id=:id";
+    $sql = "SELECT * FROM Facturas WHERE Id_Factura=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
@@ -54,7 +54,7 @@ if (isset($_GET['edit_id'])) {
 
 if (isset($_GET['delete_id'])) {
     $id = $_GET['delete_id'];
-    $sql = "DELETE FROM facturas WHERE Id_Usuario=:id";
+    $sql = "DELETE FROM facturas WHERE Id_Factura=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
@@ -63,6 +63,35 @@ if (isset($_GET['delete_id'])) {
 
 }
 
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $Cantidad = $_POST['Cantidad'];
+    $Precio_Unitario = $_POST['Precio_Unitario'];
+    $Numerp_Factura = $_POST['Numerp_Factura'];
+    $Fecha = $_POST['Fecha'];
+    $Total = $_POST['Total'];
+    $Metodo_Pago = $_POST['Metodo_Pago'];
+    $Id_Usuario = $_POST['Id_Usuario'];
+    $Id_Cliente = $_POST['Id_Cliente'];
+
+
+    $sql = "UPDATE facturas SET Cantidad=:Cantidad, Precio_Unitario=:Precio_Unitario, Numerp_Factura=:Numerp_Factura,
+            Fecha=:Fecha,Total=:Total ,Metodo_Pago=:Metodo_Pago ,Id_Usuario=:Id_Usuario ,Id_Cliente=:Id_Cliente
+             WHERE Id_Factura=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindparam(':id', $id);
+    $query->bindparam(':Cantidad', $Cantidad);
+    $query->bindparam(':Precio_Unitario', $Precio_Unitario);
+    $query->bindparam(':Numerp_Factura', $Numerp_Factura);
+    $query->bindparam(':Fecha', $Fecha);
+    $query->bindparam(':Total', $Total);
+    $query->bindparam(':Metodo_Pago', $Metodo_Pago);
+    $query->bindparam(':Id_Usuario', $Id_Usuario);
+    $query->bindparam(':Id_Cliente', $Id_Cliente);
+    $query->execute();
+    header("Location: ListadoFacturas.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,7 +195,7 @@ if (isset($_GET['delete_id'])) {
     
     <h1  style="display: flex; justify-content: center;">Bienvenidos al website</h1>
 
-    <h2><?php echo $editing ? 'Editar Usuario' : 'Agregar Usuario'; ?></h2>
+    <h2><?php echo $editing ? 'Editar Facturas' : 'Agregar Facturas'; ?></h2>
     <form method="post" action="ListadoFacturas.php">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ''; ?>">
         <label>Cantidad:</label><input type="text" name="Cantidad" value="<?php echo $editing ? $Cantidad : ''; ?>"><br>
@@ -207,7 +236,7 @@ if (isset($_GET['delete_id'])) {
                             <td>' . $row['Total'] . '</td>
                             <td>' . $row['Metodo_Pago'] . '</td>
                             <td>' . $row['Id_Usuario'] . '</td>
-                            <td>' . $row['Id_Usuario'] . '</td>
+                            <td>' . $row['Id_Cliente'] . '</td>
                             <td>
                                 <a href="?edit_id=' . $row['Id_Factura'] . '">Editar</a> |
                                 <a href="?delete_id=' . $row['Id_Factura'] . '" onclick="return confirm(\'¿Está seguro?\')">Eliminar</a>

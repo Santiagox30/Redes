@@ -38,7 +38,7 @@ $editing = false;
 if (isset($_GET['edit_id'])) {
     $editing = true;
     $id = $_GET['edit_id'];
-    $sql = "SELECT * FROM detallefactura WHERE id=:id";
+    $sql = "SELECT * FROM detallefactura WHERE Id_Detalle=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
@@ -48,7 +48,7 @@ if (isset($_GET['edit_id'])) {
 
 if (isset($_GET['delete_id'])) {
     $id = $_GET['delete_id'];
-    $sql = "DELETE FROM detallefactura WHERE Id_Factura=:id";
+    $sql = "DELETE FROM detallefactura WHERE Id_Detalle=:id";
     $query = $dbConn->prepare($sql);
     $query->bindParam(':id', $id);
     $query->execute();
@@ -56,6 +56,28 @@ if (isset($_GET['delete_id'])) {
     exit();
 }
 
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $Id_Factura = $_POST['Id_Factura'];
+    $Id_Producto = $_POST['Id_Producto'];
+    $Cantidad = $_POST['Cantidad'];
+    $Precio_Unitario = $_POST['Precio_Unitario'];
+    $Subtotal = $_POST['Subtotal'];
+
+
+    $sql = "UPDATE detallefactura SET Id_Factura=:Id_Factura, Id_Producto=:Id_Producto, Cantidad=:Cantidad,
+            Precio_Unitario=:Precio_Unitario,Subtotal=:Subtotal  WHERE Id_Detalle=:id";
+    $query = $dbConn->prepare($sql);
+    $query->bindparam(':id', $id);
+    $query->bindparam(':Id_Factura', $Id_Factura);
+    $query->bindparam(':Id_Producto', $Id_Producto);
+    $query->bindparam(':Cantidad', $Cantidad);
+    $query->bindparam(':Precio_Unitario', $Precio_Unitario);
+    $query->bindparam(':Subtotal', $Subtotal);
+    $query->execute();
+    header("Location: ListadoDetalleFactura.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
