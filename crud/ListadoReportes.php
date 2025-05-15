@@ -34,7 +34,7 @@
     if (isset($_GET['edit_id'])) {
         $editing = true;
         $id = $_GET['edit_id'];
-        $sql = "SELECT * FROM reportes WHERE id=:id";
+        $sql = "SELECT * FROM reportes WHERE Id_Reporte=:id";
         $query = $dbConn->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
@@ -44,13 +44,31 @@
     
     if (isset($_GET['delete_id'])) {
         $id = $_GET['delete_id'];
-        $sql = "DELETE FROM reportes WHERE Id_Usuario=:id";
+        $sql = "DELETE FROM reportes WHERE Id_Reporte=:id";
         $query = $dbConn->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
         header("Location: ListadoReportes.php");
         exit();
     
+    }
+
+    if (isset($_POST['update'])) {
+        $id = $_POST['id'];
+        $Tipo_de_Reporte = $_POST['Tipo_de_Reporte'];
+        $Fecha_Generacion = $_POST['Fecha_Generacion'];
+        $Id_Usuario = $_POST['Id_Usuario'];
+    
+    
+        $sql = "UPDATE reportes SET Tipo_de_Reporte=:Tipo_de_Reporte, Fecha_Generacion=:Fecha_Generacion, Id_Usuario=:Id_Usuario WHERE Id_Reporte=:id";
+        $query = $dbConn->prepare($sql);
+        $query->bindparam(':id', $id);
+        $query->bindparam(':Tipo_de_Reporte', $Tipo_de_Reporte);
+        $query->bindparam(':Fecha_Generacion', $Fecha_Generacion);
+        $query->bindparam(':Id_Usuario', $Id_Usuario);
+        $query->execute();
+        header("Location: ListadoReportes.php");
+        exit();
     }
 
 ?>

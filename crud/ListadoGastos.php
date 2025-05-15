@@ -36,7 +36,7 @@
     if (isset($_GET['edit_id'])) {
         $editing = true;
         $id = $_GET['edit_id'];
-        $sql = "SELECT * FROM gastos WHERE id=:id";
+        $sql = "SELECT * FROM Gastos WHERE Id_Gasto=:id";
         $query = $dbConn->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
@@ -46,13 +46,34 @@
     
     if (isset($_GET['delete_id'])) {
         $id = $_GET['delete_id'];
-        $sql = "DELETE FROM gastos WHERE Id_Usuario=:id";
+        $sql = "DELETE FROM gastos WHERE Id_Gasto=:id";
         $query = $dbConn->prepare($sql);
         $query->bindParam(':id', $id);
         $query->execute();
         header("Location: ListadoGastos.php");
         exit();
     
+    }
+
+    if (isset($_POST['update'])) {
+        $id = $_POST['id'];
+        $Descripcion = $_POST['Descripcion'];
+        $Monto = $_POST['Monto'];
+        $Fecha = $_POST['Fecha'];
+        $Id_Usuario = $_POST['Id_Usuario'];
+    
+    
+        $sql = "UPDATE Gastos SET Descripcion=:Descripcion, Monto=:Monto, Fecha=:Fecha,
+                Id_Usuario=:Id_Usuario WHERE Id_Gasto=:id";
+        $query = $dbConn->prepare($sql);
+        $query->bindparam(':id', $id);
+        $query->bindparam(':Descripcion', $Descripcion);
+        $query->bindparam(':Monto', $Monto);
+        $query->bindparam(':Fecha', $Fecha);
+        $query->bindparam(':Id_Usuario', $Id_Usuario);
+        $query->execute();
+        header("Location: ListadoGastos.php");
+        exit();
     }
 
 ?>
@@ -158,7 +179,7 @@
     
     <h1  style="display: flex; justify-content: center;">Bienvenidos al website</h1>
 
-    <h2><?php echo $editing ? 'Editar Usuario' : 'Agregar Usuario'; ?></h2>
+    <h2><?php echo $editing ? 'Editar Gasto' : 'Agregar Gasto'; ?></h2>
     <form method="post" action="ListadoGastos.php">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ''; ?>">
         <label>Descripcion:</label><input type="text" name="Descripcion" value="<?php echo $editing ? $Descripcion : ''; ?>"><br>
