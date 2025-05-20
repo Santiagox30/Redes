@@ -167,7 +167,7 @@
 <body>
     
     <h1  style="display: flex; justify-content: center;">Bienvenidos al website</h1>
-
+        <a href="main.php" style="padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Volver a Principal</a>
     <h2><?php echo $editing ? 'Editar Usuario' : 'Agregar Usuario'; ?></h2>
     <form method="post" action="ListadoAuditoriaUsuarios.php">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ''; ?>">
